@@ -7,6 +7,7 @@ import (
 	"image/draw"
 	"image/png"
 	"log"
+	"math"
 	"math/rand"
 	"os"
 	"os/exec"
@@ -18,12 +19,13 @@ import (
 )
 
 var (
-	count  = flag.Int("c", 256, "The number of sites in the voronoi diagram")
-	width  = flag.Int("w", 512, "The width of the map in pixels")
-	height = flag.Int("h", 512, "The height of the map in pixels")
-	seed   = flag.Int64("s", 7, "The starting seed for the map generator")
-	output = flag.String("o", "karta.png", "Output filename")
-	show   = flag.Bool("show", true, "Show generated map using Preview.app")
+	output = flag.String("output", "karta.png", "Output filename")
+	count  = flag.Int("count", 256, "The number of sites in the voronoi diagram")
+	width  = flag.Int("width", 512, "The width of the map in pixels")
+	height = flag.Int("height", 512, "The height of the map in pixels")
+	relax  = flag.Int("iterations", 1, "The number of iterations of Lloyd's algorithm to run (max 16)")
+	seed   = flag.Int64("seed", 7, "The starting seed for the map generator")
+	show   = flag.Bool("show", false, "Show generated map using Preview.app")
 
 	green    = color.RGBA{0xD1, 0xE7, 0x51, 0xFF}
 	black    = color.RGBA{0x00, 0x00, 0x00, 0xFF}
@@ -38,58 +40,90 @@ func main() {
 
 	rand.Seed(*seed)
 
-	bbox := voronoi.NewBBox(0, float64(*width), 0, float64(*height))
+	diagram := NewDiagram(float64(*width), float64(*height), *count, *relax)
+	drawing := DrawDiagramImage(diagram, *width, *height)
 
-	sites := utils.RandomSites(bbox, *count)
+	err := SaveImage(drawing, *output)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// NewDiagram generates a new Voronoi diagram, relaxed by Lloyd's algorithm
+func NewDiagram(w, h float64, c, r int) *voronoi.Diagram {
+	bbox := voronoi.NewBBox(0, w, 0, h)
+	sites := utils.RandomSites(bbox, c)
 
 	// Compute voronoi diagram.
 	diagram := voronoi.ComputeDiagram(sites, bbox, true)
 
-	img := image.NewRGBA(image.Rect(0, 0, *width, *height))
+	// Max number of iterations is 16
+	if r > 16 {
+		r = 16
+	}
+
+	// Relax using Lloyd's algorithm
+	for i := 0; i < r; i++ {
+		sites = utils.LloydRelaxation(diagram.Cells)
+		diagram = voronoi.ComputeDiagram(sites, bbox, true)
+	}
+
+	return diagram
+}
+
+// DrawDiagramImage draws a Voroni diagram to an image
+func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
+	img := image.NewRGBA(image.Rect(0, 0, w, h))
 
 	draw.Draw(img, img.Bounds(), &image.Uniform{black}, image.ZP, draw.Src)
 
+	p := draw2d.NewGraphicContext(img)
+	p.SetFillColor(green)
+
+	l := draw2d.NewGraphicContext(img)
+	l.SetLineWidth(2.1)
+	l.SetStrokeColor(blue)
+
 	// Iterate over cells
 	for _, cell := range diagram.Cells {
-		x := int(cell.Site.X)
-		y := int(cell.Site.Y)
-
-		img.Set(x, y, orange)
-
-		l := draw2d.NewGraphicContext(img)
+		p.ArcTo(cell.Site.X, cell.Site.Y, 2, 2, 0, 2*math.Pi)
+		p.FillStroke()
 
 		for _, hedge := range cell.Halfedges {
-			// width and color of line(red)
-			l.SetLineWidth(2.0)
-			l.SetStrokeColor(orange)
-
 			a := hedge.GetStartpoint()
 			b := hedge.GetEndpoint()
 
 			l.MoveTo(a.X, a.Y)
 			l.LineTo(b.X, b.Y)
-
-			//fmt.Printf("%v to %v", a, b)
-			//os.Exit(0)
 		}
 
 		l.Stroke()
 	}
 
-	file, err := os.Create(*output)
+	return img
+}
+
+// SaveImage saves an image to a file
+func SaveImage(img image.Image, fn string) error {
+	file, err := os.Create(fn)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer file.Close()
 
 	png.Encode(file, img)
+	if err != nil {
+		return err
+	}
 
 	if *show {
-		Show(file.Name())
+		previewImage(file.Name())
 	}
+
+	return nil
 }
 
-func Show(name string) {
+func previewImage(name string) {
 	cmd := exec.Command("open", "-a", "/Applications/Preview.app", name)
 
 	if err := cmd.Run(); err != nil {
