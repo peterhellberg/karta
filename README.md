@@ -4,6 +4,9 @@ Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi
 
 ![Lloyd Relaxation 0-16 iterations](http://assets.c7.se/viz/lloyd-relaxation.gif)
 
+The goal is to create something similar to what is described in the article
+[Polygonal Map Generation for Games](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/)
+
 ## License
 
 **The MIT License (MIT)**
