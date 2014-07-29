@@ -35,6 +35,11 @@ var (
 	orange   = color.RGBA{0xFF, 0x66, 0x00, 0xff}
 )
 
+const (
+	// Define Tau since the Golang math package is lacking
+	τ = 2 * math.Pi
+)
+
 func main() {
 	flag.Parse()
 
@@ -75,18 +80,18 @@ func NewDiagram(w, h float64, c, r int) *voronoi.Diagram {
 func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 	img := image.NewRGBA(image.Rect(0, 0, w, h))
 
-	draw.Draw(img, img.Bounds(), &image.Uniform{black}, image.ZP, draw.Src)
+	draw.Draw(img, img.Bounds(), &image.Uniform{darkblue}, image.ZP, draw.Src)
 
 	p := draw2d.NewGraphicContext(img)
 	p.SetFillColor(green)
 
 	l := draw2d.NewGraphicContext(img)
-	l.SetLineWidth(2.1)
+	l.SetLineWidth(3.0)
 	l.SetStrokeColor(blue)
 
 	// Iterate over cells
 	for _, cell := range diagram.Cells {
-		p.ArcTo(cell.Site.X, cell.Site.Y, 2, 2, 0, 2*math.Pi)
+		p.ArcTo(cell.Site.X, cell.Site.Y, 3, 3, 0, τ)
 		p.FillStroke()
 
 		for _, hedge := range cell.Halfedges {
