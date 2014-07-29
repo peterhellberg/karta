@@ -11,6 +11,8 @@ import (
 	"os"
 	"os/exec"
 
+	"code.google.com/p/draw2d/draw2d"
+
 	"github.com/pzsz/voronoi"
 	"github.com/pzsz/voronoi/utils"
 )
@@ -53,6 +55,25 @@ func main() {
 		y := int(cell.Site.Y)
 
 		img.Set(x, y, orange)
+
+		l := draw2d.NewGraphicContext(img)
+
+		for _, hedge := range cell.Halfedges {
+			// width and color of line(red)
+			l.SetLineWidth(2.0)
+			l.SetStrokeColor(orange)
+
+			a := hedge.GetStartpoint()
+			b := hedge.GetEndpoint()
+
+			l.MoveTo(a.X, a.Y)
+			l.LineTo(b.X, b.Y)
+
+			//fmt.Printf("%v to %v", a, b)
+			//os.Exit(0)
+		}
+
+		l.Stroke()
 	}
 
 	file, err := os.Create(*output)
