@@ -7,6 +7,12 @@ Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi
 The goal is to create something similar to what is described in the article
 [Polygonal Map Generation for Games](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/)
 
+## Installation
+
+```bash
+go get github.com/peterhellberg/karta
+```
+
 ## License
 
 **The MIT License (MIT)**
