@@ -2,24 +2,16 @@ package karta
 
 import (
 	"image"
-	"image/color"
 	"image/draw"
 	"image/png"
 	"math"
 	"os"
 
+	"github.com/peterhellberg/karta/palette"
+
 	"code.google.com/p/draw2d/draw2d"
 	"github.com/pzsz/voronoi"
 	"github.com/pzsz/voronoi/utils"
-)
-
-var (
-	green    = color.RGBA{0xD1, 0xE7, 0x51, 0xFF}
-	black    = color.RGBA{0x00, 0x00, 0x00, 0xFF}
-	white    = color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}
-	blue     = color.RGBA{0x4D, 0xBC, 0xE9, 0xFF}
-	darkblue = color.RGBA{0x26, 0xAD, 0xE4, 0xFF}
-	orange   = color.RGBA{0xFF, 0x66, 0x00, 0xff}
 )
 
 const (
@@ -53,19 +45,18 @@ func NewDiagram(w, h float64, c, r int) *voronoi.Diagram {
 func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 	img := image.NewRGBA(image.Rect(0, 0, w, h))
 
-	draw.Draw(img, img.Bounds(), &image.Uniform{darkblue}, image.ZP, draw.Src)
+	draw.Draw(img, img.Bounds(), &image.Uniform{palette.Darkblue}, image.ZP, draw.Src)
 
 	p := draw2d.NewGraphicContext(img)
-	p.SetFillColor(green)
+	p.SetFillColor(palette.Green)
 
 	l := draw2d.NewGraphicContext(img)
-	l.SetLineWidth(3.0)
-	l.SetStrokeColor(blue)
+	l.SetLineWidth(2)
+	l.SetStrokeColor(palette.Purple)
 
 	// Iterate over cells
-	for _, cell := range diagram.Cells {
-		p.ArcTo(cell.Site.X, cell.Site.Y, 3, 3, 0, τ)
-		p.FillStroke()
+	for i, cell := range diagram.Cells {
+		l.SetFillColor(palette.Pink)
 
 		for _, hedge := range cell.Halfedges {
 			a := hedge.GetStartpoint()
@@ -75,8 +66,17 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 			l.LineTo(b.X, b.Y)
 		}
 
-		l.Stroke()
+		l.FillStroke()
+
+		p.ArcTo(cell.Site.X, cell.Site.Y, 3, 3, 0, τ)
+		p.FillStroke()
+
+		if i > 200 {
+			break
+		}
 	}
+
+	l.Close()
 
 	return img
 }
