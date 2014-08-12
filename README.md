@@ -26,6 +26,36 @@ rerun -p "**/*.go" -c -x -b -- \
 
 ![Karta development](http://assets.c7.se/skitch/karta_development_iterm_vim_aimg-20140812-204452.png)
 
+## Progress
+
+First i just plotted out random dots:
+
+![Karta progress 001](http://assets.c7.se/skitch/karta_progress_001-20140812-223244.png)
+
+Then drew a voroni diagram:
+
+![Karta progress 002](http://assets.c7.se/skitch/karta_progress_002-20140812-223300.png)
+
+Found the centroids:
+
+![Karta progress 003](http://assets.c7.se/skitch/karta_progress_003-20140812-223327.png)
+
+Ran the diagram through [Lloyd's algorithm](http://en.wikipedia.org/wiki/Lloyd%27s_algorithm):
+
+![Karta progress 004](http://assets.c7.se/skitch/karta_progress_004-20140812-223344.png)
+
+A few iterations later:
+
+![Karta progress 005](http://assets.c7.se/skitch/karta_progress_005-20140812-223400.png)
+
+Started coloring the map according to the distance from the center:
+
+![Karta progress 006](http://assets.c7.se/skitch/karta_progress_006-20140812-223423.png)
+
+Added some randomness:
+
+![Karta progress 007](http://assets.c7.se/skitch/karta_progress_007-20140812-223203.png)
+
 ## License
 
 **The MIT License (MIT)**
