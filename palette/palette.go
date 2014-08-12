@@ -4,10 +4,12 @@ import "image/color"
 
 var (
 	// Green http://www.colourlovers.com/color/D1E751/limey
-	Green = color.RGBA{0xD1, 0xE7, 0x51, 0xFF}
+	Green       = color.RGBA{0xD1, 0xE7, 0x51, 0xFF}
+	Darkgreen   = color.RGBA{0x92, 0xA1, 0x38, 0xFF}
+	Darkergreen = color.RGBA{0x68, 0x73, 0x28, 0xFF}
 
-	// Gray http://www.colourlovers.com/color/333333/Grr-ey
-	Gray = color.RGBA{0x33, 0x33, 0x33, 0xFF}
+	// Gray http://www.colourlovers.com/color/B8B6B6/boring
+	Gray = color.RGBA{0xB8, 0xB6, 0xB6, 0xFF}
 
 	// Black http://www.colourlovers.com/color/000000/Black
 	Black = color.RGBA{0x00, 0x00, 0x00, 0xFF}
@@ -19,7 +21,8 @@ var (
 	Blue = color.RGBA{0x4D, 0xBC, 0xE9, 0xFF}
 
 	// Darkblue http://www.colourlovers.com/color/26ADE4/blube
-	Darkblue = color.RGBA{0x26, 0xAD, 0xE4, 0xFF}
+	Darkblue   = color.RGBA{0x26, 0xAD, 0xE4, 0xFF}
+	Darkerblue = color.RGBA{0x1e, 0x8a, 0xb6, 0xFF}
 
 	// Orange http://www.colourlovers.com/color/FF6600/Rounge
 	Orange = color.RGBA{0xFF, 0x66, 0x00, 0xFF}
