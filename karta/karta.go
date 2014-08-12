@@ -96,7 +96,7 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 		case d < unit*1.4 && rand.Intn(4) < 3:
 			prefs.FillColor = palette.Darkergreen
 			prefs.StrokeColor = palette.Darkgreen
-		case d < unit*3.4:
+		case d < unit*3.7:
 			prefs.FillColor = palette.Green
 			prefs.StrokeColor = palette.Darkgreen
 		case d < unit*4.2 && rand.Intn(4) < 3:
@@ -135,6 +135,21 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 
 		if cell.Site.Y < unit/3 || cell.Site.Y > float64(h)-unit/3 {
 			prefs.FillColor = palette.Darkblue
+			prefs.StrokeColor = palette.Darkerblue
+		}
+
+		if prefs.FillColor == palette.Green &&
+			rand.Intn(100) < 18 &&
+			prefs.DistanceToCenter > unit*1.8 {
+
+			prefs.FillColor = palette.Blue
+			prefs.StrokeColor = palette.Darkerblue
+		}
+
+		if prefs.FillColor == palette.Green &&
+			prefs.DistanceToCenter > unit*3.2 {
+
+			prefs.FillColor = palette.Beachblue
 			prefs.StrokeColor = palette.Darkerblue
 		}
 
