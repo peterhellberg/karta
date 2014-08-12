@@ -56,6 +56,19 @@ Added some randomness:
 
 ![Karta progress 007](http://assets.c7.se/skitch/karta_progress_007-20140812-223203.png)
 
+Added a different types of elevation:
+
+![Karta progress 008](http://assets.c7.se/skitch/karta_progress_008-20140813-005713.png)
+
+Removed the centroid markers:
+
+![Karta progress 009](http://assets.c7.se/skitch/karta_progress_009-20140813-005845.png)
+
+Started working on using [Simplex noise](http://en.wikipedia.org/wiki/Simplex_noise) for
+island shape and elevation:
+
+![Karta progress 010](http://assets.c7.se/skitch/karta_progress_010-20140813-010005.png)
+
 ## License
 
 **The MIT License (MIT)**
