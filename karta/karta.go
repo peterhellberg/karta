@@ -9,6 +9,8 @@ import (
 	"math/rand"
 	"os"
 
+	"bitbucket.org/s_l_teichmann/simplexnoise"
+
 	"github.com/peterhellberg/karta/palette"
 
 	"code.google.com/p/draw2d/draw2d"
@@ -46,12 +48,15 @@ func NewDiagram(w, h float64, c, r int) *voronoi.Diagram {
 type CellPrefs struct {
 	Index            int
 	DistanceToCenter float64
+	Noise            float64
 	FillColor        color.RGBA
 	StrokeColor      color.RGBA
 }
 
 // DrawDiagramImage draws a Voroni diagram to an image
 func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
+	noise := simplexnoise.NewSimplexNoise(int64(rand.Intn(w)))
+
 	unit := float64((w + h) / 20)
 
 	allPrefs := make(map[int]CellPrefs)
@@ -61,6 +66,9 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 		allPrefs[i] = CellPrefs{
 			Index:            i,
 			DistanceToCenter: utils.Distance(cell.Site, centerOfMap),
+			Noise: noise.Noise2D(
+				cell.Site.X/(float64(w)/2.5),
+				cell.Site.Y/(float64(h)/2.5)),
 		}
 	}
 
@@ -157,6 +165,22 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 			prefs.FillColor = palette.Darkgreen
 			prefs.StrokeColor = palette.Darkergreen
 		}
+
+		// Simplex noise
+		//switch {
+		//case prefs.Noise < -0.5:
+		//	prefs.FillColor = palette.Darkerpurple
+		//	prefs.StrokeColor = palette.Darkerpurple
+		//case prefs.Noise < 0:
+		//	prefs.FillColor = palette.Darkpurple
+		//	prefs.StrokeColor = palette.Darkerpurple
+		//case prefs.Noise < 0.5:
+		//	prefs.FillColor = palette.Purple
+		//	prefs.StrokeColor = palette.Darkpurple
+		//default:
+		//	prefs.FillColor = palette.Pink
+		//	prefs.StrokeColor = palette.Purple
+		//}
 
 		l.SetFillColor(prefs.FillColor)
 		l.SetStrokeColor(prefs.StrokeColor)
