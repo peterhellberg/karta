@@ -76,12 +76,10 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 	var tiny float64
 
 	switch {
-	case h <= 256:
+	case h < 512:
 		tiny = 1
-	case h <= 512:
-		tiny = 2
 	default:
-		tiny = 3
+		tiny = 2
 	}
 
 	l.SetLineWidth(tiny)
@@ -93,9 +91,12 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 		d := prefs.DistanceToCenter
 
 		switch {
-		case d < unit*1.4 && rand.Intn(4) < 3:
+		case d < unit*1.4 && rand.Intn(3) < 2:
 			prefs.FillColor = palette.Darkergreen
-			prefs.StrokeColor = palette.Darkgreen
+			prefs.StrokeColor = palette.Darkestgreen
+		case d < unit*2.2 && rand.Intn(5) < 1:
+			prefs.FillColor = palette.Darkgreen
+			prefs.StrokeColor = palette.Darkergreen
 		case d < unit*3.7:
 			prefs.FillColor = palette.Green
 			prefs.StrokeColor = palette.Darkgreen
@@ -108,10 +109,10 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 		}
 
 		// Make sure left and right edges of the map are deep water
-		if cell.Site.X < unit || cell.Site.X > float64(w)-unit {
+		if cell.Site.X < unit*0.5 || cell.Site.X > float64(w)-unit*0.5 {
 			if prefs.FillColor == palette.Green {
 				prefs.FillColor = palette.Blue
-				prefs.StrokeColor = palette.Darkerblue
+				prefs.StrokeColor = palette.Darkblue
 			}
 
 			if prefs.FillColor != palette.Blue {
@@ -121,7 +122,7 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 		}
 
 		// Make sure top and bottom edges of the map are deep water
-		if cell.Site.Y < unit/1.2 || cell.Site.Y > float64(h)-unit/1.2 {
+		if cell.Site.Y < unit/1.5 || cell.Site.Y > float64(h)-unit/1.5 {
 			if prefs.FillColor != palette.Blue {
 				prefs.FillColor = palette.Darkblue
 				prefs.StrokeColor = palette.Darkerblue
@@ -146,11 +147,15 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 			prefs.StrokeColor = palette.Darkerblue
 		}
 
-		if prefs.FillColor == palette.Green &&
-			prefs.DistanceToCenter > unit*3.2 {
-
+		if prefs.FillColor == palette.Green && prefs.DistanceToCenter > unit*3.2 {
 			prefs.FillColor = palette.Beachblue
 			prefs.StrokeColor = palette.Darkerblue
+		}
+
+		// Raise green fields in the center
+		if prefs.FillColor == palette.Green && prefs.DistanceToCenter < unit {
+			prefs.FillColor = palette.Darkgreen
+			prefs.StrokeColor = palette.Darkergreen
 		}
 
 		l.SetFillColor(prefs.FillColor)
@@ -166,8 +171,8 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 
 		l.FillStroke()
 
-		p.ArcTo(cell.Site.X, cell.Site.Y, tiny*1.4, tiny*1.4, 0, τ)
-		p.FillStroke()
+		//p.ArcTo(cell.Site.X, cell.Site.Y, tiny*1.4, tiny*1.4, 0, τ)
+		//p.FillStroke()
 	}
 
 	l.Close()
