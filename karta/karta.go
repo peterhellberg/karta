@@ -5,7 +5,6 @@ import (
 	"image/color"
 	"image/draw"
 	"image/png"
-	"log"
 	"math"
 	"math/rand"
 	"os"
@@ -53,10 +52,6 @@ type CellPrefs struct {
 
 // DrawDiagramImage draws a Voroni diagram to an image
 func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
-	f, _ := os.OpenFile("karta.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0640)
-	defer f.Close()
-	log.SetOutput(f)
-
 	unit := float64((w + h) / 20)
 
 	allPrefs := make(map[int]CellPrefs)
