@@ -55,7 +55,7 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 	l.SetStrokeColor(palette.Purple)
 
 	// Iterate over cells
-	for i, cell := range diagram.Cells {
+	for _, cell := range diagram.Cells {
 		l.SetFillColor(palette.Pink)
 
 		for _, hedge := range cell.Halfedges {
@@ -70,10 +70,6 @@ func DrawDiagramImage(diagram *voronoi.Diagram, w, h int) image.Image {
 
 		p.ArcTo(cell.Site.X, cell.Site.Y, 3, 3, 0, τ)
 		p.FillStroke()
-
-		if i > 200 {
-			break
-		}
 	}
 
 	l.Close()
