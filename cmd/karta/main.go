@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"os/exec"
 
-	"github.com/peterhellberg/karta/karta"
+	"github.com/peterhellberg/karta"
 )
 
 var (

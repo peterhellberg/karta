@@ -21,7 +21,7 @@ This is how I preview the map in a split pane:
 
 ```bash
 rerun -p "**/*.go" -c -x -b -- \
-"go run main.go -width 55 -height 55 -count 3 && aimg -w 55 karta.png"
+"go run cmd/karta/main.go -width 55 -height 55 && aimg -w 55 karta.png"
 ```
 
 ![Karta development](http://assets.c7.se/skitch/karta_development_iterm_vim_aimg-20140812-204452.png)
