@@ -10,7 +10,7 @@ The goal is to create something similar to what is described in the article
 ## Installation
 
 ```bash
-go get github.com/peterhellberg/karta
+go get github.com/peterhellberg/karta/cmd/karta
 ```
 
 ## Development
