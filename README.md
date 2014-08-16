@@ -69,6 +69,10 @@ island shape and elevation:
 
 ![Karta progress 010](http://assets.c7.se/skitch/karta_progress_010-20140813-010005.png)
 
+Elevation based on noise + distance from center of map:
+
+![Karta progress 011](http://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
+
 ## License
 
 **The MIT License (MIT)**
