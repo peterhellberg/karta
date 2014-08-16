@@ -2,7 +2,7 @@
 
 Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi_diagram).
 
-![Lloyd Relaxation 0-16 iterations](http://assets.c7.se/viz/lloyd-relaxation.gif)
+![Karta progress 011](http://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
 
 The goal is to create something similar to what is described in the article
 [Polygonal Map Generation for Games](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/)
@@ -47,6 +47,10 @@ Ran the diagram through [Lloyd's algorithm](http://en.wikipedia.org/wiki/Lloyd%2
 A few iterations later:
 
 ![Karta progress 005](http://assets.c7.se/skitch/karta_progress_005-20140812-223400.png)
+
+Animating 0-16 iterations:
+
+![Lloyd Relaxation 0-16 iterations](http://assets.c7.se/viz/lloyd-relaxation.gif)
 
 Started coloring the map according to the distance from the center:
 
