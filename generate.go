@@ -52,6 +52,20 @@ func (k *Karta) generateGeography() {
 		}
 
 		if c.Land {
+			c.Elevation -= c.Noise * 1.6
+
+			if d < u*3.3 {
+				c.Elevation += 0.3
+			}
+
+			if d < u*2.3 {
+				c.Elevation += 0.6
+			}
+
+			if d < u*1.3 {
+				c.Elevation += 0.9
+			}
+
 			switch {
 			case c.Elevation > 7:
 				c.FillColor = Green7
@@ -71,6 +85,9 @@ func (k *Karta) generateGeography() {
 			case c.Elevation > 1.5:
 				c.FillColor = Green2
 				c.StrokeColor = Green3
+			case c.Elevation < 0:
+				c.FillColor = Yellow1
+				c.StrokeColor = Yellow2
 			default:
 				c.FillColor = Green1
 				c.StrokeColor = Green2
@@ -85,7 +102,6 @@ func (k *Karta) generateGeography() {
 				c.FillColor = Blue0
 				c.StrokeColor = Blue1
 			}
-
 		} else {
 			switch {
 			case c.Elevation < -6:
@@ -106,12 +122,9 @@ func (k *Karta) generateGeography() {
 			case c.Elevation < -1:
 				c.FillColor = Blue2
 				c.StrokeColor = Blue3
-			case c.Elevation < 0:
+			default:
 				c.FillColor = Blue1
 				c.StrokeColor = Blue2
-			default:
-				c.FillColor = Pink
-				c.StrokeColor = Purple
 			}
 		}
 	}
