@@ -10,6 +10,7 @@ import (
 	"code.google.com/p/draw2d/draw2d"
 )
 
+// Generate generates a map
 func (k *Karta) Generate() error {
 	k.generateGeography()
 	k.drawImage()

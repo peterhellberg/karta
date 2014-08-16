@@ -11,6 +11,7 @@ import (
 	"github.com/pzsz/voronoi"
 )
 
+// Karta represents the entire map
 type Karta struct {
 	Width   int
 	Height  int
@@ -21,6 +22,7 @@ type Karta struct {
 	Image   image.Image
 }
 
+// New instantiates a new Karta
 func New(w, h, c, r int) *Karta {
 	return &Karta{
 		Width:   w,

@@ -5,12 +5,14 @@ import (
 	"github.com/pzsz/voronoi/utils"
 )
 
+// Diagram wraps a Voronoi diagram and contains
+// a vertex pointing to the center of the map
 type Diagram struct {
 	*voronoi.Diagram
 	Center voronoi.Vertex
 }
 
-// Diagram generates a new Voronoi diagram, relaxed by Lloyd's algorithm
+// New generates a Voronoi diagram, relaxed by Lloyd's algorithm
 func New(w, h float64, c, r int) *Diagram {
 	bbox := voronoi.NewBBox(0, w, 0, h)
 	sites := utils.RandomSites(bbox, c)
@@ -34,6 +36,7 @@ func New(w, h float64, c, r int) *Diagram {
 	return &Diagram{d, center}
 }
 
+// Distance returns the distance between two vertices
 func Distance(a, b voronoi.Vertex) float64 {
 	return utils.Distance(a, b)
 }
