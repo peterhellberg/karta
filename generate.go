@@ -29,13 +29,16 @@ func (k *Karta) generateGeography() {
 			cell.Site.Y/(float64(k.Height)/3.7))
 
 		e := elevation(k, d, n)
-		c := k.SetCell(i, &Cell{
+		c := &Cell{
 			Index:          i,
 			CenterDistance: d,
-			Noise:          n,
+			NoiseLevel:     n,
 			Elevation:      e,
 			Land:           e >= 0,
-		})
+			Site:           cell.Site,
+		}
+
+		k.Cells = append(k.Cells, c)
 
 		// Make sure left and right edges of the map are deep water
 		if cell.Site.X < u*0.5 || cell.Site.X > float64(w)-u*0.5 {
@@ -52,7 +55,7 @@ func (k *Karta) generateGeography() {
 		}
 
 		if c.Land {
-			c.Elevation -= c.Noise * 1.6
+			c.Elevation -= c.NoiseLevel * 3.2
 
 			if d < u*3.3 {
 				c.Elevation += 0.3
@@ -95,10 +98,10 @@ func (k *Karta) generateGeography() {
 
 			// Add some lakes
 			switch {
-			case c.Noise < -0.6:
+			case c.NoiseLevel < -0.6:
 				c.FillColor = Blue1
 				c.StrokeColor = Blue2
-			case c.Noise < -0.4:
+			case c.NoiseLevel < -0.4:
 				c.FillColor = Blue0
 				c.StrokeColor = Blue1
 			}

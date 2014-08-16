@@ -2,12 +2,12 @@ package main
 
 import (
 	"flag"
-	"image"
 	"image/png"
 	"log"
 	"math/rand"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/peterhellberg/karta"
 )
@@ -29,33 +29,34 @@ func main() {
 	// Seed the random number generator
 	rand.Seed(*seed)
 
+	if *count < 3 {
+		log.Fatalf("count must be at least 3")
+	}
+
 	// Create a new karta
 	k := karta.New(*width, *height, *count, *relax)
 
 	if k.Generate() == nil {
-		err := saveImage(k.Image, *output)
+		file, err := os.Create(*output)
 		if err != nil {
 			log.Fatal(err)
-		} else if *show {
-			previewImage(*output)
+		}
+		defer file.Close()
+
+		if strings.HasSuffix(*output, ".json") {
+			if j, err := k.MarshalJSON(); err == nil {
+				file.Write(j)
+			}
+		} else {
+			err := png.Encode(file, k.Image)
+
+			if err != nil {
+				log.Fatal(err)
+			} else if *show {
+				previewImage(*output)
+			}
 		}
 	}
-}
-
-// saveImage saves an image to a file
-func saveImage(img image.Image, fn string) error {
-	file, err := os.Create(fn)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	png.Encode(file, img)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 func previewImage(name string) {
