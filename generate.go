@@ -19,15 +19,13 @@ func (k *Karta) Generate() error {
 }
 
 func (k *Karta) generateTopography() {
-	w := k.Width
-	h := k.Height
 	u := k.Unit
 
 	for i, cell := range k.Diagram.Cells {
 		d := diagram.Distance(cell.Site, k.Diagram.Center)
 		n := k.Noise.Noise2D(
-			cell.Site.X/(float64(k.Width)/3.7),
-			cell.Site.Y/(float64(k.Height)/3.7))
+			cell.Site.X/(float64(k.Width)/3.14),
+			cell.Site.Y/(float64(k.Height)/3.14))
 
 		e := elevation(k, d, n)
 		c := &Cell{
@@ -41,22 +39,16 @@ func (k *Karta) generateTopography() {
 
 		k.Cells = append(k.Cells, c)
 
-		// Make sure left and right edges of the map are deep water
-		if cell.Site.X < u*0.5 || cell.Site.X > float64(w)-u*0.5 {
+		// Make sure edges of the map are water
+		if (cell.Site.X < u*0.5 || cell.Site.X > float64(k.Width)-u*0.5) ||
+			(cell.Site.Y < u/1.5 || cell.Site.Y > float64(k.Height)-u/1.5) ||
+			(cell.Site.Y < u/3 || cell.Site.Y > float64(k.Height)-u/3) {
+			c.Land = false
 			c.Elevation -= 1.2
-		}
-
-		// Make sure top and bottom edges of the map are deep water
-		if cell.Site.Y < u/1.5 || cell.Site.Y > float64(h)-u/1.5 {
-			c.Elevation -= 1.2
-		}
-
-		if cell.Site.Y < u/3 || cell.Site.Y > float64(h)-u/3 {
-			c.Elevation -= 1.1
 		}
 
 		if c.Land {
-			c.Elevation -= c.NoiseLevel * 3.2
+			c.Elevation -= c.NoiseLevel * 2.4
 
 			if d < u*3.3 {
 				c.Elevation += 0.3
