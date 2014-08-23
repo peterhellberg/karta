@@ -2,7 +2,7 @@
 
 Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi_diagram).
 
-![Karta progress 011](http://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
+![Karta progress 012](http://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
 
 The goal is to create something similar to what is described in the article
 [Polygonal Map Generation for Games](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/)
@@ -76,6 +76,10 @@ island shape and elevation:
 Elevation based on noise + distance from center of map:
 
 ![Karta progress 011](http://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
+
+Tweaked noise and yellow beaches:
+
+![Karta progress 012](http://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
 
 ## License
 
