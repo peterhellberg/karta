@@ -26,6 +26,31 @@ rerun -p "**/*.go" -c -x -b -- \
 
 ![Karta development](http://assets.c7.se/skitch/karta_development_iterm_vim_aimg-20140812-204452.png)
 
+## Usage
+
+The project includes two binaries `karta` and `karta-server`, the latter serving both PNG and JPEG.
+
+### Command line arguments
+
+```
+Usage of karta:
+  -count=2048: The number of sites in the voronoi diagram
+  -height=512: The height of the map in pixels
+  -iterations=1: The number of iterations of Lloyd's algorithm to run (max 16)
+  -output="karta.png": Output filename
+  -seed=3: The starting seed for the map generator
+  -show=false: Show generated map using Preview.app
+  -width=512: The width of the map in pixels
+```
+
+### Query string parameters
+
+  - **s** - size
+  - **w** - width
+  - **h** - height
+  - **c** - count
+  - **i** - iterations
+
 ## Progress
 
 First i just plotted out random dots:
