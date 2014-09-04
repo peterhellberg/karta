@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleExecutable</key>
+	<string>karta-gui</string>
+	<key>CFBundleIconFile</key>
+	<string>gopher.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>se.c7.karta</string>
+	<key>CFBundleName</key>
+	<string>Karta</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>MIT</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+</dict>
+</plist>
