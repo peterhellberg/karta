@@ -2,6 +2,8 @@
 
 Experimental GUI for the [karta](https://github.com/peterhellberg/karta) library.
 
+![Karta GUI](http://assets.c7.se/skitch/karta-gui-20140904-230153.png)
+
 ## Dependencies
 
 On Mac OS X you'll need [Qt 5](https://qt-project.org/wiki/Qt_5.0).
