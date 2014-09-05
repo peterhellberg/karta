@@ -2,52 +2,66 @@ package main
 
 import (
 	"fmt"
-	"image"
-	"math/rand"
 	"os"
 
-	"github.com/peterhellberg/karta"
 	"gopkg.in/qml.v1"
 )
 
-func main() {
-	if err := qml.Run(run); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
+const qmlString = `
+// Start of the QML string
+import QtQuick 2.0
+import QtQuick.Particles 2.0
+
+Rectangle {
+	id: root
+
+	width: 800
+	height: 600
+
+	color: "#030f14"
+
+	ParticleSystem {
+		anchors.fill: parent
+
+		ImageParticle {
+			source: "image://star/FFFFFF88"
+
+			rotation: 15
+			rotationVariation: 45
+			rotationVelocity: 35
+			rotationVelocityVariation: 25
+		}
+
+		Emitter {
+			anchors.fill: parent
+			emitRate: 160
+			lifeSpan: 2000
+			lifeSpanVariation: 500
+
+			size: 1
+			endSize: 22
+		}
+	}
+
+	Image {
+		id: karta
+
+		x: (parent.width - width)/2
+		y: (parent.height - height)/2
+
+		source: "image://karta/map.png"
 	}
 }
 
-func kartaImageProvider(id string, width, height int) image.Image {
-	if width == 0 {
-		width = 512
-	}
-
-	if height == 0 {
-		height = 512
-	}
-
-	seed := 3
-	count := 512
-	iterations := 1
-
-	// Seed the random number generator
-	rand.Seed(int64(seed))
-
-	// Create a new karta
-	k := karta.New(width, height, count, iterations)
-
-	if k.Generate() == nil {
-		return k.Image
-	}
-
-	return image.NewRGBA(image.Rect(0, 0, width, height))
-}
+// End of the QML string`
 
 func run() error {
 	engine := qml.NewEngine()
-	engine.AddImageProvider("karta", kartaImageProvider)
 
-	component, err := engine.LoadString("karta-gui", qmlString)
+	engine.AddImageProvider("karta", kartaImageProvider)
+	engine.AddImageProvider("star", starImageProvider)
+
+	component, err := engine.LoadString("karta.qml", qmlString)
 	if err != nil {
 		return err
 	}
@@ -60,10 +74,11 @@ func run() error {
 	return nil
 }
 
-const qmlString = `
-import QtQuick 2.0
-
-Image {
-	source: "image://karta/map.png"
+func main() {
+	if err := qml.Run(run); err != nil {
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
+	}
 }
-`
+
+// vim: ft=qml.go
