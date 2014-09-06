@@ -2,7 +2,7 @@
 
 Experimental GUI for the [karta](https://github.com/peterhellberg/karta) library.
 
-![Karta GUI](http://assets.c7.se/skitch/karta-gui-20140904-230153.png)
+![Karta GUI](http://assets.c7.se/skitch/Karta_QML-20140906-165833.png)
 
 ## Dependencies
 
