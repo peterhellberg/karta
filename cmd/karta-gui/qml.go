@@ -77,7 +77,7 @@ Rectangle {
 			x: (parent.width - width)/2
 			y: (parent.height - height)/2
 
-			width: parent.width/1.5
+			width: parent.width/1.6
 
 			fillMode: Image.PreserveAspectFit
 			clip: false
@@ -104,6 +104,7 @@ Rectangle {
     Row {
       id: row
 			anchors.fill: parent
+			anchors.margins: 10
 			spacing: 20
 
 			Text {
