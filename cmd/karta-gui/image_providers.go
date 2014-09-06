@@ -4,8 +4,6 @@ import (
 	"image"
 	"image/color"
 
-	"math/rand"
-
 	"github.com/peterhellberg/karta"
 )
 
@@ -18,12 +16,8 @@ func kartaImageProvider(name string, width, height int) image.Image {
 		height = 512
 	}
 
-	seed := 3
 	count := 512
 	iterations := 1
-
-	// Seed the random number generator
-	rand.Seed(int64(seed))
 
 	// Create a new karta
 	k := karta.New(width, height, count, iterations)
