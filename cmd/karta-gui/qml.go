@@ -9,54 +9,20 @@ import GoExtensions 1.0
 Rectangle {
 	id: root
 
+	property alias seed: seedInput.text
+	property int clickX: 0
+	property int clickY: 0
+
 	width: 800
 	height: 600
 
 	color: "#030f14"
 
-	property alias seed: seedInput.text
-
-	Rectangle {
-    id: form
-    width: parent.width; height: 50
-
-		y: parent.height-50
-
-		color: "#061f29"
-
-    Row {
-      id: row
-      anchors.centerIn: parent
-			spacing: 20
-
-			Text {
-				id: helloText
-				text: "seed:"
-
-				color: "#FFFFFF"
-				font.pointSize: 12
-				font.bold: true
-			}
-
-			TextInput {
-				id: seedInput
-
-				color: "#1e8bb8"
-				font.pointSize: 12
-				font.bold: true
-
-				width: 96;
-				height: 20
-				focus: true
-				text: "1"
-			}
-    }
-	}
-
 	Rectangle {
 		id: background
 
-		width: parent.width; height: parent.height-50
+		width: parent.width
+		height: parent.height-50
 
 		gradient: Gradient {
   		GradientStop { position: 0.0; color: "#061f29" }
@@ -68,7 +34,8 @@ Rectangle {
   	  width: parent.width
   	  height: parent.height
 			onClicked: {
-				ip.visible = !ip.visible
+				root.clickX = mouse.x
+				root.clickY = mouse.y
 			}
 		}
 
@@ -78,7 +45,10 @@ Rectangle {
 			ImageParticle {
 				id: ip
 
-				source: "image://star/FFFFFF88"
+				source: "image://star/FFFFFF"
+
+				colorVariation: 0.2
+				alpha: 0.6
 
 				rotation: 15
 				rotationVariation: 45
@@ -99,28 +69,71 @@ Rectangle {
 
 		Image {
 			id: karta
-
+			cache: false
 			source: "image://karta/map.png"
+
+			property int clicks: 0
 
 			x: (parent.width - width)/2
 			y: (parent.height - height)/2
 
-			width: parent.width/2
-			height: parent.height/2
+			width: parent.width/1.5
 
-			fillMode: Image.PreserveAspectCrop
-			clip: true
-		}
+			fillMode: Image.PreserveAspectFit
+			clip: false
 
-		GoRect {
-			x: 60; y: 60; width: 200; height: 150
-			SequentialAnimation on x {
-				loops: Animation.Infinite
-
-				NumberAnimation { from: 60; to: 320; duration: 4000; easing.type: Easing.InOutQuad }
-				NumberAnimation { from: 320; to: 60; duration: 4000; easing.type: Easing.InOutQuad }
+			MouseArea {
+				anchors.fill: parent
+				onClicked: {
+					parent.clicks += 1
+					parent.source = "image://karta/map" + karta.clicks
+				}
 			}
 		}
+	}
+
+	Rectangle {
+    id: form
+		width: parent.width
+		height: 50
+
+		y: parent.height-50
+
+		color: "#061f29"
+
+    Row {
+      id: row
+			anchors.fill: parent
+			spacing: 20
+
+			Text {
+				id: seedText
+				text: ctrl.message
+
+				color: "#FFFFFF"
+				font.pointSize: 12
+				font.bold: true
+
+				MouseArea {
+					id: mouseArea
+					anchors.fill: parent
+					onReleased: ctrl.textReleased(seedInput)
+				}
+			}
+
+			TextInput {
+				id: seedInput
+
+				color: "#1e8bb8"
+				font.pointSize: 12
+				font.bold: true
+
+				width: 96;
+				height: 20
+				focus: true
+				text: "1"
+			}
+    }
 	}
 }
 
