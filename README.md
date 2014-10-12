@@ -2,6 +2,8 @@
 
 Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi_diagram).
 
+[![GoDoc](https://godoc.org/github.com/peterhellberg/karta?status.svg)](https://godoc.org/github.com/peterhellberg/karta)
+
 ![Karta progress 012](http://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
 
 The goal is to create something similar to what is described in the article
