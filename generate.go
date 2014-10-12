@@ -5,7 +5,7 @@ import (
 	"math/rand"
 
 	"github.com/peterhellberg/karta/diagram"
-	. "github.com/peterhellberg/karta/palette"
+	"github.com/peterhellberg/karta/palette"
 
 	"code.google.com/p/draw2d/draw2d"
 )
@@ -69,59 +69,59 @@ func (k *Karta) generateTopography() {
 
 			switch {
 			case c.Elevation > 7:
-				c.FillColor = Green7
-				c.StrokeColor = Green8
+				c.FillColor = palette.Green7
+				c.StrokeColor = palette.Green8
 			case c.Elevation > 6.1:
-				c.FillColor = Green6
-				c.StrokeColor = Green7
+				c.FillColor = palette.Green6
+				c.StrokeColor = palette.Green7
 			case c.Elevation > 4.8:
-				c.FillColor = Green5
-				c.StrokeColor = Green6
+				c.FillColor = palette.Green5
+				c.StrokeColor = palette.Green6
 			case c.Elevation > 3.1:
-				c.FillColor = Green4
-				c.StrokeColor = Green5
+				c.FillColor = palette.Green4
+				c.StrokeColor = palette.Green5
 			case c.Elevation > 2.4:
-				c.FillColor = Green3
-				c.StrokeColor = Green4
+				c.FillColor = palette.Green3
+				c.StrokeColor = palette.Green4
 			case c.Elevation > 1.5:
-				c.FillColor = Green2
-				c.StrokeColor = Green3
+				c.FillColor = palette.Green2
+				c.StrokeColor = palette.Green3
 			case c.Elevation < -0.6:
-				c.FillColor = Blue1
-				c.StrokeColor = Blue2
+				c.FillColor = palette.Blue1
+				c.StrokeColor = palette.Blue2
 			case c.Elevation < -0.4:
-				c.FillColor = Blue0
-				c.StrokeColor = Blue1
+				c.FillColor = palette.Blue0
+				c.StrokeColor = palette.Blue1
 			case c.Elevation < 0:
-				c.FillColor = Yellow1
-				c.StrokeColor = Yellow2
+				c.FillColor = palette.Yellow1
+				c.StrokeColor = palette.Yellow2
 			default:
-				c.FillColor = Green1
-				c.StrokeColor = Green2
+				c.FillColor = palette.Green1
+				c.StrokeColor = palette.Green2
 			}
 		} else {
 			switch {
 			case c.Elevation < -6:
-				c.FillColor = Blue7
-				c.StrokeColor = Blue7
+				c.FillColor = palette.Blue7
+				c.StrokeColor = palette.Blue7
 			case c.Elevation < -5:
-				c.FillColor = Blue6
-				c.StrokeColor = Blue7
+				c.FillColor = palette.Blue6
+				c.StrokeColor = palette.Blue7
 			case c.Elevation < -4:
-				c.FillColor = Blue5
-				c.StrokeColor = Blue6
+				c.FillColor = palette.Blue5
+				c.StrokeColor = palette.Blue6
 			case c.Elevation < -3:
-				c.FillColor = Blue4
-				c.StrokeColor = Blue5
+				c.FillColor = palette.Blue4
+				c.StrokeColor = palette.Blue5
 			case c.Elevation < -2:
-				c.FillColor = Blue3
-				c.StrokeColor = Blue4
+				c.FillColor = palette.Blue3
+				c.StrokeColor = palette.Blue4
 			case c.Elevation < -1:
-				c.FillColor = Blue2
-				c.StrokeColor = Blue3
+				c.FillColor = palette.Blue2
+				c.StrokeColor = palette.Blue3
 			default:
-				c.FillColor = Blue1
-				c.StrokeColor = Blue2
+				c.FillColor = palette.Blue1
+				c.StrokeColor = palette.Blue2
 			}
 		}
 	}
