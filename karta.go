@@ -11,12 +11,15 @@ import (
 	"github.com/pzsz/voronoi"
 )
 
+// Cells represents a list of cells
+type Cells []*Cell
+
 // Karta represents the entire map
 type Karta struct {
 	Width   int
 	Height  int
 	Unit    float64
-	Cells   []*Cell
+	Cells   Cells
 	Diagram *diagram.Diagram
 	Noise   *noise.Noise
 	Image   image.Image
@@ -28,7 +31,7 @@ func New(w, h, c, r int) *Karta {
 		Width:   w,
 		Height:  h,
 		Unit:    float64(math.Min(float64(w), float64(h)) / 20),
-		Cells:   []*Cell{},
+		Cells:   Cells{},
 		Diagram: diagram.New(float64(w), float64(h), c, r),
 		Noise:   noise.New(rand.Int63n(int64(w * h))),
 	}
@@ -56,7 +59,7 @@ func (k *Karta) MarshalJSON() ([]byte, error) {
 		Height int     `json:"height"`
 		Unit   float64 `json:"unit"`
 		Edges  []*Edge `json:"edges"`
-		Cells  []*Cell `json:"cells"`
+		Cells  Cells   `json:"cells"`
 	}{
 		Width:  k.Width,
 		Height: k.Height,
