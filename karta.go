@@ -37,6 +37,11 @@ func New(w, h, c, r int) *Karta {
 	}
 }
 
+// Image creates a new Karta, then generates an Image
+func Image(w, h, c, r int) image.Image {
+	return New(w, h, c, r).GenerateImage()
+}
+
 // Edge represents two vertexes
 type Edge struct {
 	VaVertex voronoi.Vertex
@@ -67,4 +72,13 @@ func (k *Karta) MarshalJSON() ([]byte, error) {
 		Edges:  edges,
 		Cells:  k.Cells,
 	}, "", "  ")
+}
+
+// GenerateImage generates an image
+func (k *Karta) GenerateImage() image.Image {
+	if k.Generate() == nil {
+		return k.Image
+	}
+
+	return image.NewRGBA(image.Rect(0, 0, k.Width, k.Height))
 }
