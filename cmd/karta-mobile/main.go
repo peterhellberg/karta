@@ -48,18 +48,13 @@ func main() {
 	})
 }
 
-func newNode() *sprite.Node {
-	n := &sprite.Node{}
-	eng.Register(n)
-	scene.AppendChild(n)
-
-	return n
-}
-
 func loadScene(count int) {
-	kn = newNode()
-	scene = &sprite.Node{}
+	kn = &sprite.Node{}
 
+	scene = &sprite.Node{}
+	scene.AppendChild(kn)
+
+	eng.Register(kn)
 	eng.Register(scene)
 	eng.SetSubTex(kn, loadTexture(count))
 	eng.SetTransform(kn, f32.Affine{
