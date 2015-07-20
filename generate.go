@@ -7,7 +7,7 @@ import (
 	"github.com/peterhellberg/karta/diagram"
 	"github.com/peterhellberg/karta/palette"
 
-	"code.google.com/p/draw2d/draw2d"
+	"github.com/llgcode/draw2d"
 )
 
 // Generate generates a map
