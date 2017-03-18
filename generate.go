@@ -36,8 +36,6 @@ func (k *Karta) generateTopography() {
 			Site:           cell.Site,
 		}
 
-		k.Cells = append(k.Cells, c)
-
 		if c.Land {
 			// Make sure edges of the map are water
 			if (cell.Site.X < u*0.5 || cell.Site.X > float64(k.Width)-u*0.5) ||
@@ -123,6 +121,8 @@ func (k *Karta) generateTopography() {
 				c.StrokeColor = palette.Blue2
 			}
 		}
+
+		k.Cells = append(k.Cells, c)
 	}
 }
 
