@@ -4,10 +4,9 @@ import (
 	"image"
 	"math/rand"
 
+	"github.com/llgcode/draw2d/draw2dimg"
 	"github.com/peterhellberg/karta/diagram"
 	"github.com/peterhellberg/karta/palette"
-
-	"github.com/llgcode/draw2d"
 )
 
 // Generate generates a map
@@ -130,7 +129,7 @@ func (k *Karta) generateTopography() {
 func (k *Karta) drawImage() {
 	img := image.NewRGBA(image.Rect(0, 0, k.Width, k.Height))
 
-	l := draw2d.NewGraphicContext(img)
+	l := draw2dimg.NewGraphicContext(img)
 
 	l.SetLineWidth(1.2)
 
