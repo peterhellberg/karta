@@ -8,44 +8,72 @@ import (
 	"github.com/peterhellberg/karta"
 
 	"golang.org/x/mobile/app"
-	"golang.org/x/mobile/event"
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/sprite"
-	"golang.org/x/mobile/sprite/clock"
-	"golang.org/x/mobile/sprite/glsprite"
+	"golang.org/x/mobile/event/lifecycle"
+	"golang.org/x/mobile/event/paint"
+	"golang.org/x/mobile/exp/f32"
+	"golang.org/x/mobile/exp/sprite"
+	"golang.org/x/mobile/exp/sprite/clock"
+	"golang.org/x/mobile/exp/sprite/glsprite"
 )
 
 var (
 	start     = time.Now()
 	lastClock = clock.Time(-1)
-	eng       = glsprite.Engine()
+	eng       = glsprite.Engine(nil)
 	scene     *sprite.Node
 	kn        *sprite.Node
 )
 
 func main() {
-	app.Run(app.Callbacks{
-		Draw: func() {
-			if scene == nil {
-				loadScene(40)
-			}
+	app.Main(func(a app.App) {
+		for e := range a.Events() {
+			switch e := a.Filter(e).(type) {
+			case lifecycle.Event:
+				// ...
+			case paint.Event:
+				log.Print("Call OpenGL here.")
 
-			now := clock.Time(time.Since(start) * 60 / time.Second)
-			if now == lastClock {
-				return
-			}
-			lastClock = now
+				if scene == nil {
+					loadScene(40)
+				}
 
-			eng.Render(scene, now)
-		},
-		Touch: func(e event.Touch) {
-			if e.Type != event.TouchStart {
-				return
-			}
+				now := clock.Time(time.Since(start) * 60 / time.Second)
+				if now == lastClock {
+					return
+				}
+				lastClock = now
 
-			eng.SetSubTex(kn, loadTexture((int(e.Loc.X) * (int(e.Loc.Y/25) + 1))))
-		},
+				eng.Render(scene, now)
+
+				a.Publish()
+			}
+		}
 	})
+
+	app.Main(
+	//app.Callbacks{
+	//Draw: func() {
+	//	if scene == nil {
+	//		loadScene(40)
+	//	}
+
+	//	now := clock.Time(time.Since(start) * 60 / time.Second)
+	//	if now == lastClock {
+	//		return
+	//	}
+	//	lastClock = now
+
+	//	eng.Render(scene, now)
+	//},
+	//Touch: func(e touch.Event) {
+	//	if e.Type != touch.TypeBegin {
+	//		return
+	//	}
+
+	//	eng.SetSubTex(kn, loadTexture((int(e.Loc.X) * (int(e.Loc.Y/25) + 1))))
+	//},
+	//}
+	)
 }
 
 func loadScene(count int) {
