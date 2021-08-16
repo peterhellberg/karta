@@ -77,7 +77,7 @@ A few iterations later:
 
 Animating 0-16 iterations:
 
-![Lloyd Relaxation 0-16 iterations](http://assets.c7.se/viz/lloyd-relaxation.gif)
+![Lloyd Relaxation 0-16 iterations](https://assets.c7.se/viz/lloyd-relaxation.gif)
 
 Started coloring the map according to the distance from the center:
 
