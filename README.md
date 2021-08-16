@@ -4,7 +4,7 @@ Just playing around with [Voronoi diagrams](http://en.wikipedia.org/wiki/Voronoi
 
 [![GoDoc](https://godoc.org/github.com/peterhellberg/karta?status.svg)](https://godoc.org/github.com/peterhellberg/karta)
 
-![Karta progress 012](http://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
+![Karta progress 012](https://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
 
 The goal is to create something similar to what is described in the article
 [Polygonal Map Generation for Games](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/)
@@ -26,7 +26,7 @@ rerun -p "**/*.go" -c -x -b -- \
 "go run cmd/karta/main.go -width 55 -height 55 && aimg -w 55 karta.png"
 ```
 
-![Karta development](http://assets.c7.se/skitch/karta_development_iterm_vim_aimg-20140812-204452.png)
+![Karta development](https://assets.c7.se/skitch/karta_development_iterm_vim_aimg-20140812-204452.png)
 
 ## Usage
 
@@ -57,23 +57,23 @@ Usage of karta:
 
 First i just plotted out random dots:
 
-![Karta progress 001](http://assets.c7.se/skitch/karta_progress_001-20140812-223244.png)
+![Karta progress 001](https://assets.c7.se/skitch/karta_progress_001-20140812-223244.png)
 
 Then drew a voroni diagram:
 
-![Karta progress 002](http://assets.c7.se/skitch/karta_progress_002-20140812-223300.png)
+![Karta progress 002](https://assets.c7.se/skitch/karta_progress_002-20140812-223300.png)
 
 Found the centroids:
 
-![Karta progress 003](http://assets.c7.se/skitch/karta_progress_003-20140812-223327.png)
+![Karta progress 003](https://assets.c7.se/skitch/karta_progress_003-20140812-223327.png)
 
 Ran the diagram through [Lloyd's algorithm](http://en.wikipedia.org/wiki/Lloyd%27s_algorithm):
 
-![Karta progress 004](http://assets.c7.se/skitch/karta_progress_004-20140812-223344.png)
+![Karta progress 004](https://assets.c7.se/skitch/karta_progress_004-20140812-223344.png)
 
 A few iterations later:
 
-![Karta progress 005](http://assets.c7.se/skitch/karta_progress_005-20140812-223400.png)
+![Karta progress 005](https://assets.c7.se/skitch/karta_progress_005-20140812-223400.png)
 
 Animating 0-16 iterations:
 
@@ -81,38 +81,38 @@ Animating 0-16 iterations:
 
 Started coloring the map according to the distance from the center:
 
-![Karta progress 006](http://assets.c7.se/skitch/karta_progress_006-20140812-223423.png)
+![Karta progress 006](https://assets.c7.se/skitch/karta_progress_006-20140812-223423.png)
 
 Added some randomness:
 
-![Karta progress 007](http://assets.c7.se/skitch/karta_progress_007-20140812-223203.png)
+![Karta progress 007](https://assets.c7.se/skitch/karta_progress_007-20140812-223203.png)
 
 Added a different types of elevation:
 
-![Karta progress 008](http://assets.c7.se/skitch/karta_progress_008-20140813-005713.png)
+![Karta progress 008](https://assets.c7.se/skitch/karta_progress_008-20140813-005713.png)
 
 Removed the centroid markers:
 
-![Karta progress 009](http://assets.c7.se/skitch/karta_progress_009-20140813-005845.png)
+![Karta progress 009](https://assets.c7.se/skitch/karta_progress_009-20140813-005845.png)
 
 Started working on using [Simplex noise](http://en.wikipedia.org/wiki/Simplex_noise) for
 island shape and elevation:
 
-![Karta progress 010](http://assets.c7.se/skitch/karta_progress_010-20140813-010005.png)
+![Karta progress 010](https://assets.c7.se/skitch/karta_progress_010-20140813-010005.png)
 
 Elevation based on noise + distance from center of map:
 
-![Karta progress 011](http://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
+![Karta progress 011](https://assets.c7.se/skitch/karta_progress_011-20140816-013747.png)
 
 Tweaked noise and yellow beaches:
 
-![Karta progress 012](http://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
+![Karta progress 012](https://assets.c7.se/skitch/karta_progress_012-20140823-155942.png)
 
 ## License
 
 **The MIT License (MIT)**
 
-Copyright (C) 2014 [Peter Hellberg](http://c7.se/)
+Copyright (C) 2014 [Peter Hellberg](https://c7.se/)
 
 > Permission is hereby granted, free of charge, to any person obtaining
 > a copy of this software and associated documentation files (the "Software"),
