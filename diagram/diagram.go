@@ -31,7 +31,10 @@ func New(w, h float64, c, r int) *Diagram {
 		d = voronoi.ComputeDiagram(sites, bbox, true)
 	}
 
-	center := voronoi.Vertex{float64(w / 2), float64(h / 2)}
+	center := voronoi.Vertex{
+		X: float64(w / 2),
+		Y: float64(h / 2),
+	}
 
 	return &Diagram{d, center}
 }
