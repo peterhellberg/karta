@@ -12,7 +12,11 @@ The goal is to create something similar to what is described in the article
 ## Installation
 
 ```bash
-go get github.com/peterhellberg/karta/cmd/karta
+# Basic command line tool
+go install github.com/peterhellberg/karta/cmd/karta@latest
+
+# A web server generating maps based on query parameters
+go install github.com/peterhellberg/karta/cmd/karta-server@latest
 ```
 
 ## Development
