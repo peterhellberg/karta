@@ -49,7 +49,12 @@ func main() {
 				z := getZ(k.Cells, x, y)
 
 				for i := 0; i < z; i++ {
-					voxels = append(voxels, Voxel{x, y, i + 1, MakeColor(m.At(x, y))})
+					voxels = append(voxels, Voxel{
+						X:     x,
+						Y:     y,
+						Z:     i + 1,
+						Color: MakeColor(m.At(x, y)),
+					})
 				}
 			}
 		}
