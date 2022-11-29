@@ -1,13 +1,13 @@
 package noise
 
-import "bitbucket.org/s_l_teichmann/simplexnoise"
+import "github.com/peterhellberg/gfx"
 
 // Noise wraps simplexnoise.SimplexNoise
 type Noise struct {
-	*simplexnoise.SimplexNoise
+	*gfx.SimplexNoise
 }
 
 // New generates a new Noise instance
 func New(seed int64) *Noise {
-	return &Noise{simplexnoise.NewSimplexNoise(seed)}
+	return &Noise{gfx.NewSimplexNoise(seed)}
 }
